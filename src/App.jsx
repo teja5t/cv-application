@@ -1,33 +1,67 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Generator from './generator/Generator'
+import Document from './document/Document'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [resumeData, setResumeData] = useState(
+    {
+      header: { fullName: 'Tejas Tirthapura', phoneNumber: '515-203-1258', email: 'tirthapuratejas@gmail.com', location: 'Saratoga CA, 95070' },
+      education: [{ school: 'Columbia University', schoolLocation: 'New York, NY', degree: 'BA in Computer Science', details: 'Columbia-Juilliard Exchange', graduation: 'May 2028', key: crypto.randomUUID() }]
+    }
+    )
+
+  const addEducationSection = () => {
+    const newResumeData = {
+      ...resumeData, education: 
+        [...resumeData['education'], { 
+          school: '', 
+          schoolLocation: '', 
+          degree: '', 
+          details: '', 
+          graduation: '', 
+          key: crypto.randomUUID() }
+      ]
+    }
+    setResumeData(newResumeData);
+  }
+
+  const removeEducationSection = (index) => {
+    const newResumeData = {
+      ...resumeData, education: 
+        resumeData['education'].filter((element, i) => index !== i)
+    }
+    setResumeData(newResumeData);
+  }
+
+  const handleInputChange = (section, key, value, index) => {
+    const newResumeData = {...resumeData};
+    if (Array.isArray(newResumeData[section])) {
+      newResumeData[section][index][key] = value;
+    } else {
+      newResumeData[section][key] = value;
+    }
+    setResumeData(newResumeData)
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 className='title'>Resume Generator</h1>
+      <div className='content'>
+        <div className="generator">
+          <Generator
+            data={resumeData}
+            updateDocument={handleInputChange}
+            addEducationSection={addEducationSection}
+            removeEducationSection={removeEducationSection}
+          />
+        </div>
+        <div className="document">
+          <Document 
+            data={resumeData}
+          />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
