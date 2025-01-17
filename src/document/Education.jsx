@@ -1,5 +1,5 @@
 export default function Education({ data }) {
-    //console.log(data)
+    console.log(data)
     return (
         <>
             <h3>Education</h3>
@@ -8,7 +8,7 @@ export default function Education({ data }) {
                     <p><strong>{element.school}, </strong>{element.schoolLocation}</p>
                     <p>{element.degree}</p>
                     <p>{element.details}</p>
-                    <p>{element.graduation}</p>
+                    <p className="date">{element.graduation}</p>
                 </div>
             ))}
         </>

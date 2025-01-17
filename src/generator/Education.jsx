@@ -23,12 +23,12 @@ export default function Education({ data, updateDocument, addEducationSection, r
                             component={field.component}
                         />
                     ))}
-                    <button onClick={() => removeEducationSection(index)}>
+                    <button type='button' onClick={() => removeEducationSection(index)}>
                         Delete
                     </button>
                 </div>
             ))}
-            <button onClick={() => addEducationSection()}>Add</button>
+            <button type='button' onClick={() => addEducationSection()}>Add</button>
         </>
     );
 }

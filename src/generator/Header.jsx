@@ -10,7 +10,6 @@ export default function Header({ data, updateDocument }) {
 
     return (
         <>
-            <h2>Header</h2>
             {fields.map((field) => (
                 <FormComponent
                     key={field.key}

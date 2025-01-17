@@ -1,0 +1,16 @@
+h2, #header-info {
+    text-align: center;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+.document h2::after {
+    content: ''; /* Required for pseudo-elements */
+    display: block; /* Makes it behave like a block element */
+    margin: 8px auto; /* Adjusts spacing and centers the line */
+    width: 100%; /* Set the width of the line */
+    height: 1px; /* Set the thickness of the line */
+    background-color: black; /* Line color */
+}
